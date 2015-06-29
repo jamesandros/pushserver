@@ -5,10 +5,11 @@
  *******************************************************************************/
 package com.sobei.msg.util.cache;
 
-import com.sobei.msg.util.cache.JedisTemplate.JedisAction;
-
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.exceptions.JedisException;
+
+import com.sobei.msg.util.cache.JedisTemplate.JedisAction;
 
 public class JedisUtils {
 

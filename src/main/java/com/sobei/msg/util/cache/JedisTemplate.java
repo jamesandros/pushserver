@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Pipeline;
 import redis.clients.jedis.Tuple;
 import redis.clients.jedis.exceptions.JedisConnectionException;
@@ -148,10 +149,10 @@ public class JedisTemplate {
 	 */
 	protected boolean handleJedisException(JedisException jedisException) {
 		if (jedisException instanceof JedisConnectionException) {
-			logger.error("Redis connection " + jedisPool.getAddress() + " lost.", jedisException);
+			logger.error("Redis connection " + jedisPool + " lost.", jedisException);
 		} else if (jedisException instanceof JedisDataException) {
 			if ((jedisException.getMessage() != null) && (jedisException.getMessage().indexOf("READONLY") != -1)) {
-				logger.error("Redis connection " + jedisPool.getAddress() + " are read-only slave.", jedisException);
+				logger.error("Redis connection " + jedisPool + " are read-only slave.", jedisException);
 			} else {
 				// dataException, isBroken=false
 				return false;
