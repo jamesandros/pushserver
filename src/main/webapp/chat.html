@@ -45,7 +45,10 @@ body {
 	</form>
 </body>
 <script type="text/javascript">
-	var socket = io.connect('http://localhost:8088');
+	var socket = io.connect('http://localhost:9092');
+	socket.on('connect',function() {
+		output('<span class="connect-msg">Client has connected to the server!</span>');
+	});
 	socket.on('connect',function() {
 		output('<span class="connect-msg">Client has connected to the server!</span>');
 	});
@@ -53,11 +56,16 @@ body {
 		output('<span class="username-msg">' + data.userName + ' : </span>'
 				+ data.message);
 	});
-
+	socket.on('chatevent', function(data) {
+		output('<span class="username-msg">' + data.userName + ' : </span>'
+				+ data.message);
+	});
 	socket.on('disconnect',function() {
 		output('<span class="disconnect-msg">The client has disconnected! </span>');
 	});
-
+	socket.on('disconnect',function() {
+		output('<span class="disconnect-msg">The client has disconnected! </span>');
+	});
 	function sendDisconnect() {
 		socket.disconnect();
 	}

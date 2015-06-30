@@ -1,7 +1,14 @@
 package com.corundumstudio.socketio.demo;
 
-import com.corundumstudio.socketio.listener.*;
-import com.corundumstudio.socketio.*;
+import java.util.Iterator;
+
+import com.corundumstudio.socketio.AckRequest;
+import com.corundumstudio.socketio.Configuration;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.listener.ConnectListener;
+import com.corundumstudio.socketio.listener.DataListener;
+import com.corundumstudio.socketio.listener.DisconnectListener;
 
 public class ChatLauncher {
 
@@ -16,15 +23,26 @@ public class ChatLauncher {
             @Override
             public void onData(SocketIOClient client, ChatObject data, AckRequest ackRequest) {
                 // broadcast messages to all clients
-                server.getBroadcastOperations().sendEvent("chatevent", data);
+            	System.out.println(client.getSessionId());
+               // server.getBroadcastOperations().sendEvent("chatevent", data);
+            	Iterator<SocketIOClient> list= server.getAllClients().iterator();
+            	while(list.hasNext()){
+            		System.out.println(list.next().getSessionId());
+            	}
             }
         });
-
-        server.start();
-
-        Thread.sleep(Integer.MAX_VALUE);
-
-        server.stop();
+        server.start(); 
+        server.addConnectListener(new ConnectListener() {
+			public void onConnect(SocketIOClient client) {
+				System.out.println("已经连接上了");
+			}
+		});
+        server.addDisconnectListener(new DisconnectListener() {
+			public void onDisconnect(SocketIOClient client) {
+				System.out.println(client.getSessionId());
+				System.out.println("该用户已离线");
+			}
+		});
     }
 
 }
