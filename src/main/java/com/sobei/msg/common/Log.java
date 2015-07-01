@@ -1,5 +1,6 @@
 package com.sobei.msg.common;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 /**
  * 
@@ -10,7 +11,7 @@ import java.util.logging.Logger;
 public class Log{
 	//公共模块日志
 	private static Logger common = Logger.getLogger("common");
-	
+	//缓存日志
 	private static Logger cache = Logger.getLogger("cache");
 	
 	public static Logger getCommon() {

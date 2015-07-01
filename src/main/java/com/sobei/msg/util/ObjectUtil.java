@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
  *  对象操作工具类
  * @author andros
  *
- * 2015年6月28日
+ * 2014年6月28日
  */
 public class ObjectUtil {
 
@@ -116,4 +116,8 @@ public class ObjectUtil {
     	}
     	return false;
     }
+    public static void main(String[] args) {
+    	String s = null;
+		System.out.println(objIsNotNull(s));
+	}
 }

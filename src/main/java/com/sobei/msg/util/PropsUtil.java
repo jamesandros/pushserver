@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * 属性文件操作工具类
  * @author andros
  *
- * 2015年4月18日
+ * 2014年4月18日
  */
 public class PropsUtil {
 

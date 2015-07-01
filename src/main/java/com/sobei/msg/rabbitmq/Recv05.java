@@ -24,19 +24,15 @@ public class Recv05 {
 				System.out.println("挂掉了");
 			}
 		});
-		
 		Channel channel = connection.createChannel();
-		
 		channel.exchangeDeclare(EXCHANGE_NAME, "direct"/* exchange类型 */);
 		// 创建匿名Queue
 		// String queueName = channel.queueDeclare().getQueue();
 		// 订阅某个关键词，绑定到匿名Queue中
 		channel.queueBind("quenu", EXCHANGE_NAME, SERVERID);
-
 		
 		
 		QueueingConsumer consumer = new QueueingConsumer(channel);
-
 		channel.basicConsume("quenu", true, consumer);
 		QueueingConsumer.Delivery delivery = consumer.nextDelivery();
 		String message = new String(delivery.getBody());

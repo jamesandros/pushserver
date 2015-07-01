@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContextAware;
  * 
  * @author andros
  *
- * 2015年6月29日下午12:12:14
+ * 2014年6月29日下午12:12:14
  */
 public class SpringContextUtil implements ApplicationContextAware{
 	    private static ApplicationContext applicationContext;
