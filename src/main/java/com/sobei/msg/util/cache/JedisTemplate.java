@@ -854,4 +854,11 @@ public class JedisTemplate {
 			}
 		});
 	}
+	public Set<String> keys(final String pattern){
+		return execute(new JedisAction<Set<String>>(){
+			public Set<String> action(Jedis jedis) {
+				return jedis.keys(pattern);
+			}
+		});
+	}
 }
